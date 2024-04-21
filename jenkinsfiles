@@ -2,6 +2,7 @@ pipeline {
     agent { 
         label 'spc' 
         }  
+    tools { maven 'MAVEN_3.6.9'}
     parameters {
         choice(name: 'MAVEN_GOAL', choices: ['package', 'clean package'], description:'This is maven goal')
         }  
