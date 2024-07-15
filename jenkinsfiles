@@ -20,7 +20,8 @@ pipeline{
             }
             post {
                 always {
-                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+                    cleanWs()
+                    archiveArtifacts artifacts: '**/target/newdir/*.jar', allowEmptyArchive: true
                 }
                 }
             }  
