@@ -20,7 +20,6 @@ pipeline{
             }
             post {
                 always {
-                    cleanWs()
                     archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
                 }
                 }
