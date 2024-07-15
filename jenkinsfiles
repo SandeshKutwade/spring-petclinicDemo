@@ -1,19 +1,29 @@
-pipeline {  
-    agent { 
-        label 'spc' 
-        }  
-    tools { maven 'MAVEN_3.6.9'}
-    parameters {
-        choice(name: 'MAVEN_GOAL', choices: ['package', 'clean package'], description:'This is maven goal')
-        }  
+pipeline{
+    agent {label 'mavennode'}
+    tools {maven 'maventool'}
     stages {
-        stage('git') {  
-            steps {git url: 'https://github.com/SandeshKutwade/spring-petclinicDemo.git',branch: 'main'  
-                   }
+        stage ('checkout') {
+            steps {
+                checkout scm
             }
-        stage('build') {
-            steps { sh "mvn ${params.MAVEN_GOAL}"
+            
+        }
+        stage ('Build'){
+            steps{
+                sh 'mvn clean install'
             }
         }
-    }
-}
+         stage ('Testing') {
+            steps{
+                sh "mvn test"
+                junit '**/target/surefire-reports/TEST-*.xml'
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+                }
+                }
+            }  
+        }
+       
+    }    
