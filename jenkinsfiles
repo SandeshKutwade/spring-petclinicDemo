@@ -1,4 +1,7 @@
 pipeline{
+    environment {
+        JAR_FILE_PATH = "/var/lib/jenkins/workspace/spring/target/spring-petclinic-3.2.0-SNAPSHOT.jar"
+    }
     agent {
         node{
             label 'mavennode'        
@@ -31,6 +34,7 @@ pipeline{
             } 
         stage ('DeployDocker') {
             steps{
+                sh "cp ${JAR_FILE_PATH} ."
                 sh 'docker build -t springpetapp .'
             }
         }
