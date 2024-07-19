@@ -1,12 +1,10 @@
 pipeline{
     agent {
         node{
-            label 'mavennode'
-            customWorkspace '/home/ubuntu/springapp'
+            label 'mavennode'        
             }
 
         }
-        
     tools {maven 'maventool'}
     stages {
         stage ('checkout') {
@@ -39,4 +37,4 @@ pipeline{
         }
        
     }    
-    
+
