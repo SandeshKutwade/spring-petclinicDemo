@@ -29,11 +29,11 @@ pipeline{
                 }
                 }
             } 
-        // stage ('DeployDocker') {
-        //     steps{
-        //         sh 'docker build -t springpetapp .'
-        //     }
-        // }
+        stage ('DeployDocker') {
+            steps{
+                sh 'docker build -t springpetapp .'
+            }
+        }
         }
        
     }    
